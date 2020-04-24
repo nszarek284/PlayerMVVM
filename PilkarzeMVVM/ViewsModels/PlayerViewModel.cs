@@ -12,8 +12,8 @@ namespace ViewsModels
     internal partial class PlayersViewModel : ViewModelBase
     {
         private Player player = new Player();
-        private string _imie = "";
-        private string _nazwisko = "";
+        private string _imie = " ";
+        private string _nazwisko = " ";
         private int _wiek = 18;
         private double _waga = 75;
         private int _selectedIndex;

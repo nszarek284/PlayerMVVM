@@ -15,7 +15,14 @@
         
         <Style x:Key="EmptyName" TargetType="TextBox">
         <Style.Triggers>
-            <MultiTrigger>
+               
+                    <Trigger Property="Text" Value=" ">
+                        <Setter Property = "Foreground" Value="DarkGray"/>
+                    </Trigger>
+                    <Trigger Property="Text" Value=" ">
+                        <Setter Property = "Foreground" Value="DarkGray"/>
+                    </Trigger>
+                    <MultiTrigger>
         <MultiTrigger.Conditions>
             <Condition Property="IsFocused" Value="false"/>
             <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
@@ -49,9 +56,20 @@
 
         <Label Grid.Column="0" Grid.Row="0" Content="Imię:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="30" />
         <TextBox  Style="{StaticResource EmptyName}" Text="{Binding Path=Imie, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" ToolTip="Podaj imię" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="210" Height="30" BorderThickness="3">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="GotFocus">
+                    <i:InvokeCommandAction Command="{Binding ClearImie}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
         </TextBox>
         <Label Grid.Column="0" Grid.Row="1"  Content="Nazwisko:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="30" />
-        <TextBox  Style="{StaticResource EmptyName}" Text="{Binding Path=Nazwisko, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" ToolTip="Podaj nazwisko" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="210" Height="30" BorderThickness="3" />
+        <TextBox  Style="{StaticResource EmptyName}" Text="{Binding Path=Nazwisko, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" ToolTip="Podaj nazwisko" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="210" Height="30" BorderThickness="3">
+            <i:Interaction.Triggers>
+                <i:EventTrigger EventName="GotFocus">
+                    <i:InvokeCommandAction Command="{Binding ClearNazw}"/>
+                </i:EventTrigger>
+            </i:Interaction.Triggers>
+        </TextBox>
 
         <Label Grid.Column="0" Grid.Row="2" Content="Wiek:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="30"/>
         <ComboBox ItemsSource="{Binding Path=WiekTab}" SelectedValue="{Binding Path=Wiek, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="210" Height="30" />

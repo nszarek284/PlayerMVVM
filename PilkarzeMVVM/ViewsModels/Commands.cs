@@ -17,6 +17,8 @@ namespace ViewsModels
         private ICommand _delete = null;
         private ICommand _edit = null;
         private ICommand _load = null;
+        private ICommand _clearN = null;
+        private ICommand _clearI = null;
 
         public ICommand Add
         {
@@ -102,17 +104,41 @@ namespace ViewsModels
             }
         }
 
-       /* public ICommand Clear
+        public ICommand ClearImie
         {
             get
             {
-                if(_clear == null)
+                if (_clearI == null)
                 {
-
+                    _clearI = new RelayCommand(
+                        arg =>
+                        {
+                            Imie = null;
+                            onPropertyChanged(nameof(Imie));
+                        },
+                        arg => Imie == " ");
                 }
-                return _clear;
+                return _clearI;
             }
-        }*/
+        }
+        public ICommand ClearNazw
+        {
+            get
+            {
+                if (_clearN == null)
+                {
+                    _clearN = new RelayCommand(
+                        arg =>
+                        {
+                            Nazwisko = null;
+                            onPropertyChanged(nameof(Nazwisko));
+                        },
+                        arg => Nazwisko == " ");
+                }
+                return _clearN;
+            }
+        }
+
 
         public ICommand Write 
         {
