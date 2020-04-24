@@ -32,8 +32,7 @@ namespace ViewsModels
                         Players.Add(new ViewModel(new Player(Imie, Nazwisko, Wiek, Waga)));
                       
                     },
-                    arg => !(string.IsNullOrEmpty(Imie) || string.IsNullOrEmpty(Nazwisko)) || Nazwisko == "" || Imie == "" );
-
+                    arg => !((string.IsNullOrEmpty(Imie) || Imie==" " )||( string.IsNullOrEmpty(Nazwisko)|| Nazwisko==" ")));
 
                 }
                 return _add;
@@ -62,7 +61,7 @@ namespace ViewsModels
         {
             get
             {
-                if(_edit == null)
+                if (_edit == null)
                 {
                     _edit = new RelayCommand(
                         arg =>
@@ -73,7 +72,7 @@ namespace ViewsModels
                             player.Wiek = Wiek;
                             player.Waga = Waga;
                         },
-                        arg => SelectedIndex != -1
+                        arg => (!((string.IsNullOrEmpty(Imie) || Imie == " ") || (string.IsNullOrEmpty(Nazwisko) || Nazwisko == " ")) && SelectedIndex != -1)
                         );
 
                 }
@@ -89,15 +88,15 @@ namespace ViewsModels
                 {
                     _load = new RelayCommand(
                         arg =>
-                        {
+                        {   
                             ViewModel player = _players[SelectedIndex];
-                            player.Imie = Imie;
-                            player.Nazwisko = Nazwisko;
-                            player.Wiek = Wiek;
-                            player.Waga = Waga;
+                            Imie = player.Imie;
+                            Nazwisko = player.Nazwisko;
+                            Wiek = player.Wiek;
+                            Waga = player.Waga;
                             onPropertyChanged(nameof(Imie), nameof(Nazwisko), nameof(Wiek), nameof(Waga));
                         },
-                        arg => SelectedIndex != 0
+                        arg => SelectedIndex != -1
                         );
                 }
                 return _load;
@@ -140,7 +139,7 @@ namespace ViewsModels
         }
 
 
-        public ICommand Write 
+        public ICommand Save 
         {
             get
             {
@@ -158,14 +157,14 @@ namespace ViewsModels
             }
 
             string WriteJson = JsonConvert.SerializeObject(writing);
-            File.WriteAllText(@"data.json", WriteJson);
+            File.WriteAllText(@"./data.json", WriteJson);
         }
 
         public void read()
         {
-            if(File.Exists("data.json"))
+            if(File.Exists(@"./data.json"))
             {
-                List<Player> reading = JsonConvert.DeserializeObject<List<Player>>(File.ReadAllText("data.json"));
+                List<Player> reading = JsonConvert.DeserializeObject<List<Player>>(File.ReadAllText(@"./data.json"));
 
                 if(reading != null)
                 {

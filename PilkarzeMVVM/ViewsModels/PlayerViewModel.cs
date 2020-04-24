@@ -12,11 +12,11 @@ namespace ViewsModels
     internal partial class PlayersViewModel : ViewModelBase
     {
         private Player player = new Player();
-        private string _imie = " ";
-        private string _nazwisko = " ";
+        private string _imie=" ";
+        private string _nazwisko=" ";
         private int _wiek = 18;
         private double _waga = 75;
-        private int _selectedIndex;
+        private int _selectedIndex = -1;
         private ObservableCollection<ViewModel> _players = null;
         private int[] _wiekTab = generate();
 
@@ -41,7 +41,7 @@ namespace ViewsModels
         public double Waga
         {
             get => _waga;
-            set => _waga = value;
+            set { _waga = Math.Round(value,1); onPropertyChanged(nameof(Waga)); }
         }
 
         public int SelectedIndex

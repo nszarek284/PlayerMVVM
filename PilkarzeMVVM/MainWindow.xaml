@@ -55,7 +55,7 @@
         </Grid.RowDefinitions>
 
         <Label Grid.Column="0" Grid.Row="0" Content="Imię:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="30" />
-        <TextBox  Style="{StaticResource EmptyName}" Text="{Binding Path=Imie, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" ToolTip="Podaj imię" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="210" Height="30" BorderThickness="3">
+        <TextBox  Style="{StaticResource EmptyName}" Text="{Binding Path=Imie, Mode=TwoWay}" Grid.Column="1" Grid.Row="0" ToolTip="Podaj imię (pole obowiązkowe)" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right" Width="210" Height="30" BorderThickness="3">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
                     <i:InvokeCommandAction Command="{Binding ClearImie}"/>
@@ -63,7 +63,7 @@
             </i:Interaction.Triggers>
         </TextBox>
         <Label Grid.Column="0" Grid.Row="1"  Content="Nazwisko:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="30" />
-        <TextBox  Style="{StaticResource EmptyName}" Text="{Binding Path=Nazwisko, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" ToolTip="Podaj nazwisko" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="210" Height="30" BorderThickness="3">
+        <TextBox  Style="{StaticResource EmptyName}" Text="{Binding Path=Nazwisko, Mode=TwoWay}" Grid.Column="1" Grid.Row="1" ToolTip="Podaj nazwisko (pole obowiązkowe)" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Right"  Width="210" Height="30" BorderThickness="3">
             <i:Interaction.Triggers>
                 <i:EventTrigger EventName="GotFocus">
                     <i:InvokeCommandAction Command="{Binding ClearNazw}"/>
@@ -74,8 +74,8 @@
         <Label Grid.Column="0" Grid.Row="2" Content="Wiek:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="30"/>
         <ComboBox ItemsSource="{Binding Path=WiekTab}" SelectedValue="{Binding Path=Wiek, Mode=TwoWay}" Grid.Column="1" Grid.Row="2" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalAlignment="Right" Width="210" Height="30" />
         <Label Grid.Column="0" Grid.Row="3" Content="Waga:" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" Height="30"/>
-        <Slider  Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Minimum="50" Maximum="100" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="{Binding Path=Waga , Mode=TwoWay}"/>
-        <Label Grid.Column="2" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Height="30" Content="{Binding Path=Waga}" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,440.6,15" Width="44"/>
+        <Slider  Grid.Column="1" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Minimum="50" Maximum="100" TickPlacement="BottomRight" TickFrequency="0.1" IsSnapToTickEnabled="True" Value="{Binding Path=Waga, StringFormat=\{0:0.###\} , Mode=TwoWay}"/>
+        <Label Grid.Column="2" Grid.Row="3" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Center" Height="35" Content="{Binding Path= Waga}" Grid.ColumnSpan="2" HorizontalAlignment="Right" Margin="0,15,440.6,15" Width="44"/>
         <Button IsDefault="True" Grid.Column="0" Grid.Row="4" Grid.ColumnSpan="3" Width="100"  Height="30" Content="Dodaj" Command="{Binding Add}" />
         <Button Grid.Column="0" Grid.Row="5" Grid.ColumnSpan="3" Width="100"  Height="30" Content="Modyfikuj" Command="{Binding Edit}" />
         <Button Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="3" Width="100"  Height="30" Content="Usuń" Command="{Binding Delete}"/>
@@ -86,7 +86,9 @@
                         <Label Content="{Binding Imie}"/>
                         <Label Content="{Binding Nazwisko}"/>
                         <Label Content="{Binding Wiek}"/>
+                        <Label Content="lat,"/>
                         <Label Content="{Binding Waga}"/>
+                        <Label Content="kg"/>
                     </StackPanel>
                 </DataTemplate>
             </ListView.ItemTemplate>
